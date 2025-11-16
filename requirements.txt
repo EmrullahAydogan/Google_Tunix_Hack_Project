@@ -1,0 +1,46 @@
+# Core Dependencies
+google-tunix[prod]>=0.1.0
+jax>=0.4.20
+jaxlib>=0.4.20
+flax>=0.8.0
+optax>=0.1.9
+chex>=0.1.85
+
+# Model & Tokenization
+transformers>=4.40.0
+sentencepiece>=0.2.0
+huggingface-hub>=0.20.0
+
+# Data Processing
+datasets>=2.18.0
+numpy>=1.24.0
+pandas>=2.0.0
+
+# Training & Evaluation
+accelerate>=0.27.0
+evaluate>=0.4.0
+scikit-learn>=1.4.0
+
+# Visualization
+matplotlib>=3.8.0
+seaborn>=0.13.0
+plotly>=5.19.0
+
+# Logging & Tracking
+wandb>=0.16.0
+tensorboard>=2.15.0
+tqdm>=4.66.0
+
+# Utilities
+pyyaml>=6.0
+python-dotenv>=1.0.0
+rich>=13.7.0
+
+# Development (optional)
+pytest>=8.0.0
+black>=24.0.0
+ruff>=0.3.0
+pre-commit>=3.6.0
+
+# Kaggle specific
+kaggle>=1.6.0

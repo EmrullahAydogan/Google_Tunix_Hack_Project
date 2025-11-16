@@ -1,0 +1,112 @@
+# Training Configuration for Gemma 3 1B with GRPO
+# Google Tunix Hack Competition
+
+experiment_name: "gemma3_1b_grpo_gsm8k"
+output_dir: "models/checkpoints"
+
+# Model Configuration
+model:
+  name: "gemma-3-1b"
+  pretrained_model: "google/gemma-3-1b"
+  model_type: "flax"
+  load_in_8bit: false  # Set true for memory constrained environments
+  use_flash_attention: true
+
+# Training Configuration
+training:
+  algorithm: "GRPO"  # Options: PPO, GRPO, GSPO
+  num_epochs: 3
+  batch_size: 8
+  gradient_accumulation_steps: 4
+  learning_rate: 1.0e-5
+  warmup_steps: 100
+  weight_decay: 0.01
+  max_grad_norm: 1.0
+
+  # LoRA/PEFT settings
+  use_lora: true
+  lora_rank: 16
+  lora_alpha: 32
+  lora_dropout: 0.1
+  target_modules:
+    - "q_proj"
+    - "v_proj"
+    - "k_proj"
+    - "o_proj"
+
+# RL Configuration
+reinforcement_learning:
+  # GRPO specific
+  grpo:
+    num_rollouts: 4
+    temperature: 0.7
+    top_p: 0.9
+    max_new_tokens: 512
+
+  # Reward function
+  reward:
+    correctness_weight: 0.5
+    reasoning_quality_weight: 0.3
+    clarity_weight: 0.2
+
+  # PPO parameters (if using PPO)
+  ppo:
+    clip_epsilon: 0.2
+    value_loss_coef: 0.5
+    entropy_coef: 0.01
+
+# Data Configuration
+data:
+  dataset_name: "gsm8k"
+  dataset_path: "data/raw/gsm8k"
+  train_split: "train"
+  test_split: "test"
+  max_train_samples: 7500
+  max_eval_samples: 1000
+  max_length: 1024
+
+  # Chain-of-thought prompting
+  prompt_template: |
+    Question: {question}
+
+    Let's solve this step by step:
+
+  response_template: |
+    {reasoning}
+
+    Answer: {answer}
+
+# Evaluation Configuration
+evaluation:
+  eval_steps: 500
+  save_steps: 1000
+  logging_steps: 100
+  eval_strategy: "steps"
+  metric_for_best_model: "accuracy"
+  greater_is_better: true
+
+# Logging & Monitoring
+logging:
+  use_wandb: true
+  wandb_project: "google-tunix-hack"
+  wandb_entity: null  # Set your wandb username
+  log_level: "INFO"
+  report_to: ["wandb", "tensorboard"]
+
+# Hardware Configuration
+hardware:
+  device: "tpu"  # Options: tpu, gpu, cpu
+  num_devices: 8  # TPU v2/v3: 8, TPU v4: 4
+  mixed_precision: "bf16"
+  distributed_strategy: "fsdp"  # Options: fsdp, dp, ddp
+
+# Checkpointing
+checkpointing:
+  save_total_limit: 3
+  load_best_model_at_end: true
+  save_strategy: "steps"
+  resume_from_checkpoint: null
+
+# Reproducibility
+seed: 42
+deterministic: true

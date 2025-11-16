@@ -1,1 +1,178 @@
-# Google_Tunix_Hack_Project
+# Google Tunix Hack - Train a Model to Show Its Work
+
+![Competition](https://img.shields.io/badge/Kaggle-Competition-20BEFF?logo=kaggle)
+![Prize](https://img.shields.io/badge/Prize-$100K-gold)
+![Deadline](https://img.shields.io/badge/Deadline-Jan%2012%202026-red)
+
+Fine-tuning Gemma models with Tunix to teach them step-by-step reasoning.
+
+## 🎯 Project Overview
+
+This project participates in the [Google Tunix Hack](https://www.kaggle.com/competitions/google-tunix-hackathon) competition, where we train language models to not just provide answers, but to **show their reasoning process** step-by-step.
+
+### Goal
+Train a Gemma model using Tunix to:
+- Solve complex problems (mathematics, logic, reasoning)
+- Explain its thought process clearly
+- Show step-by-step reasoning (Chain-of-Thought)
+- Be transparent and interpretable
+
+## 🏗️ Project Structure
+
+```
+Google_Tunix_Hack_Project/
+├── notebooks/                    # Kaggle notebooks
+│   └── main_training_notebook.ipynb  # Main submission notebook
+│
+├── src/tunix_project/           # Source code
+│   ├── data/                    # Data loading & preprocessing
+│   ├── models/                  # Model definitions
+│   ├── training/                # Training loops & trainers
+│   ├── evaluation/              # Evaluation metrics
+│   └── utils/                   # Utility functions
+│
+├── configs/                     # Configuration files
+│   ├── training/                # Training configs
+│   └── model/                   # Model configs
+│
+├── data/                        # Dataset storage
+│   ├── raw/                     # Raw datasets
+│   └── processed/               # Processed datasets
+│
+├── models/                      # Trained models
+│   ├── checkpoints/             # Training checkpoints
+│   └── final/                   # Final models
+│
+├── scripts/                     # Utility scripts
+│   ├── download_data.py         # Download datasets
+│   ├── preprocess.py            # Preprocess data
+│   └── evaluate.py              # Evaluate models
+│
+├── docs/                        # Documentation
+│   ├── writeup/                 # Kaggle writeup drafts
+│   └── video/                   # Video script & materials
+│
+├── assets/                      # Media assets
+│   ├── images/                  # Cover image, charts
+│   └── videos/                  # Demo videos
+│
+├── tests/                       # Unit tests
+│
+├── RESEARCH_NOTES.md            # Research findings
+├── SUBMISSION_REQUIREMENTS.md   # Submission checklist
+├── requirements.txt             # Python dependencies
+└── README.md                    # This file
+```
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Python 3.10+
+- TPU access (Kaggle or Google Cloud)
+- 16GB+ RAM recommended
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/EmrullahAydogan/Google_Tunix_Hack_Project.git
+cd Google_Tunix_Hack_Project
+
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+```
+
+### Download Data
+
+```bash
+python scripts/download_data.py --dataset gsm8k
+```
+
+### Run Training
+
+**Option 1: Kaggle Notebook (Recommended)**
+1. Upload `notebooks/main_training_notebook.ipynb` to Kaggle
+2. Enable TPU accelerator
+3. Run all cells
+
+**Option 2: Local/Cloud**
+```bash
+python scripts/train.py --config configs/training/grpo_gemma3_1b.yaml
+```
+
+## 📊 Approach
+
+### Model Selection
+- **Gemma 3 1B** - Chosen for efficiency and 32K context window
+
+### Training Method
+- **Tunix GRPO** - Group Relative Policy Optimization
+- **Dataset:** GSM8K (Grade School Math 8K problems)
+- **Focus:** Step-by-step mathematical reasoning
+
+### Key Features
+1. Chain-of-Thought prompting
+2. Reward function for reasoning quality
+3. Self-consistency evaluation
+4. Clear step-by-step explanations
+
+## 📈 Results
+
+*(To be updated after training)*
+
+- Accuracy on GSM8K test set: TBD
+- Reasoning quality score: TBD
+- Step-by-step clarity: TBD
+
+## 📝 Submission Components
+
+- ✅ **Kaggle Writeup** - [Link TBD]
+- ✅ **Public Notebook** - [Link TBD]
+- ✅ **YouTube Video** - [Link TBD]
+- ✅ **Reproducibility** - All configs included
+
+## 🛠️ Technologies Used
+
+- **Tunix** - JAX-native LLM post-training library
+- **JAX/Flax** - High-performance numerical computing
+- **Gemma 3 1B** - Google's open-weight language model
+- **Hugging Face** - Model hub and datasets
+- **Kaggle TPU** - Training infrastructure
+
+## 📚 Documentation
+
+- [Research Notes](RESEARCH_NOTES.md) - Literature review and findings
+- [Submission Requirements](SUBMISSION_REQUIREMENTS.md) - Competition checklist
+- [Writeup Draft](docs/writeup/) - Kaggle writeup preparation
+- [Video Script](docs/video/) - YouTube video preparation
+
+## 🤝 Contributing
+
+This is a competition project, but feedback and suggestions are welcome!
+
+## 📄 License
+
+This project is for educational and competition purposes.
+
+## 🙏 Acknowledgments
+
+- Google for organizing the Tunix Hack
+- Kaggle for hosting the competition
+- Tunix team for the amazing library
+- GSM8K dataset creators
+
+## 📧 Contact
+
+- **Author:** Emrullah Aydogan
+- **GitHub:** [@EmrullahAydogan](https://github.com/EmrullahAydogan)
+- **Competition:** [Google Tunix Hack](https://www.kaggle.com/competitions/google-tunix-hackathon)
+
+---
+
+**Status:** 🚧 In Development
+**Last Updated:** November 16, 2025
+**Competition Deadline:** January 12, 2026
